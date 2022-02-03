@@ -3,4 +3,7 @@
     <string name="bill_amount">Bill Amount</string>
     <string name="currency_symbol">$</string>
     <string name="tip_percent">Tip Percent</string>
+    <string name="default_tip">15%</string>
+    <string name="tip_amount">Tip Amount</string>
+    <string name="default_tip_amount">0</string>
 </resources>
