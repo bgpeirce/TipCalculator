@@ -6,4 +6,8 @@
     <string name="default_tip">15%</string>
     <string name="tip_amount">Tip Amount</string>
     <string name="default_tip_amount">0</string>
+    <string name="no_round">No Round</string>
+    <string name="round">Round</string>
+    <string name="split_bill">Split Bill?</string>
+    <string name="submit_btn">Submit</string>
 </resources>
