@@ -13,4 +13,11 @@
     <string name="rounding" translatable="false">Rounding</string>
     <string name="split_bill" translatable="false">Split the Bill?</string>
     <string name="calculate" translatable="false">Calculate</string>
+    <string-array name="split_array">
+        <item>No</item>
+        <item>Two Ways</item>
+        <item>Three Ways</item>
+        <item>Four Ways</item>
+    </string-array>
+    <string name="each_pay" translatable="false">Each Pays</string>
 </resources>
