@@ -2,6 +2,9 @@ package edu.ivytech.tipcalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.RadioGroup
@@ -17,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     private var tipPercent = 0.15
     private var rounding : Rounding = Rounding.NOROUND
+    private var split = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,6 +30,34 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.list_item, items)
         binding.splitBillDropdown.setAdapter(adapter)
         binding.splitBillDropdown.setText(items[0], false)
+        binding.splitBillDropdown.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                for (i in items.indices) {
+                    if (items[i] == p0.toString()) {
+                        split = i + 1
+                        break
+                    }
+                }
+
+                if (split > 1){
+                    binding.splitAmountLayout.visibility = View.VISIBLE
+                }
+                else {
+                    binding.splitAmountLayout.visibility = View.GONE
+                }
+
+                calculateAndDisplay()
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
 
         binding.calculateBtn.setOnClickListener { calculateAndDisplay() }
 
@@ -67,6 +99,11 @@ class MainActivity : AppCompatActivity() {
         val symbol = DecimalFormatSymbols()
         symbol.currencySymbol = ""
         (currencyFormat as DecimalFormat).decimalFormatSymbols = symbol
+
+        if (split > 1){
+            var splitAmount = totalAmount / split
+            binding.splitAmountEditText.setText(currencyFormat.format(splitAmount))
+        }
 
         binding.tipAmountEditText.setText(currencyFormat.format(tipAmount))
         binding.totalAmountEditText.setText(currencyFormat.format(totalAmount))
